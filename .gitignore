@@ -1,0 +1,10 @@
+# note 
+note-command.md 
+# venv 
+.venv/
+# docker volume
+w1/data_pgadmin/
+w1/ny_taxi_postgres_data/
+# csv 
+*.csv
+
