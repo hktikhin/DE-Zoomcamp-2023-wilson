@@ -1,0 +1,59 @@
+###
+### A complete description of a Prefect Deployment for flow 'parent-etl-gcs-to-bq'
+###
+name: bq-etl
+description: Run mutiple etl to big query
+version: a92e328db0cad600a6805314007c5046
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: parent-etl-gcs-to-bq
+manifest_path: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  _block_document_id: b5ef56fb-098b-4111-9b85-0378e2464707
+  _block_document_name: anonymous-b5b26e6b-4325-428a-a7e3-581b00199142
+  _is_anonymous: true
+  block_type_slug: process
+  _block_type_slug: process
+storage: null
+path: C:\Users\Administrator\Documents\Python-Scripts\data-engineering-zoomcamp-2023\w2
+entrypoint: flows\hw2_q3.py:parent_etl_gcs_to_bq
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    year:
+      title: year
+      default: 2019
+      position: 0
+      type: integer
+    months:
+      title: months
+      default:
+      - 2
+      - 3
+      position: 1
+      type: array
+      items:
+        type: integer
+    color:
+      title: color
+      default: yellow
+      position: 2
+      type: string
+  required: null
+  definitions: null
