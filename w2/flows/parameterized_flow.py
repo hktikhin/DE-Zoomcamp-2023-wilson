@@ -18,7 +18,7 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
     """Fix dtype issue"""
     df = df.copy(deep=True)
     # Make pandas to infer correct datatype (as pandas parse int with missing as float)
-    df = df.fillna(-999999, inplace=True)
+    df.fillna(-999999, inplace=True)
     df = df.convert_dtypes()
     df = df.replace(-999999, None)
 
