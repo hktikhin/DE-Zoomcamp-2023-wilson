@@ -8,6 +8,7 @@ w1/ny_taxi_postgres_data/
 # csv 
 *.csv
 *.parquet.gz
+data/
 # terraform 
 w1/terraform/
 # prefect blocks

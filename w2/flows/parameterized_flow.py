@@ -3,7 +3,7 @@ import os
 
 from pathlib import Path 
 from prefect import flow, task 
-from prefect_gcp.cloud_storage import GcsBucket
+from prefect_gcp.cloud_storage import GcsBucket, cloud_storage_upload_blob_from_file
 # from prefect.tasks import task_input_hash
 # from datetime import timedelta
 
@@ -37,11 +37,14 @@ def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
     df.to_parquet(path, compression="gzip")
     return path
 
-@task()
+
 def write_gcs(path:Path) -> None: 
     """Upload local parquet file to gcs"""
     gcs_block = GcsBucket.load("zoom-gcs")
-    gcs_block.upload_from_path(from_path=path, to_path=path.as_posix())
+    # upload data by 10 MB chunk
+    cloud_storage_upload_blob_from_file(
+        path, gcs_block.bucket, path.as_posix(), gcs_block.gcp_credentials, chunk_size = 10_485_760
+    )
 
 @flow()
 def etl_web_to_gcs(year: int, month: int, color: str) -> None:
