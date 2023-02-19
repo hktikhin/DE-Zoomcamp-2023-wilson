@@ -17,6 +17,11 @@ def fetch(dataset_url: str) -> pd.DataFrame:
 def clean(df: pd.DataFrame) -> pd.DataFrame:
     """Fix dtype issue"""
     df = df.copy(deep=True)
+    # Make pandas to infer correct datatype (as pandas parse int with missing as float)
+    df.fillna(-999999, inplace=True)
+    df = df.convert_dtypes()
+    df = df.replace(-999999, None)
+
     if "tpep_pickup_datetime" in df.columns: 
         df["tpep_pickup_datetime"] = pd.to_datetime(df.tpep_pickup_datetime)
         df["tpep_dropoff_datetime"] = pd.to_datetime(df.tpep_dropoff_datetime)
